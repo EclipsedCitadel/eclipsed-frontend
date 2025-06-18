@@ -1,25 +1,40 @@
 "use client";
-import Link from "next/link";          // <-- add this at the top
+
+import { Suspense } from "react";
+import { useSearchParams } from "next/navigation";
+import Link from "next/link";
+
+function NotFoundContent() {
+  const searchParams = useSearchParams();
+
+  return (
+    <section className="min-h-screen flex flex-col items-center justify-center bg-white text-center p-6">
+      <h1 className="text-4xl font-bold text-gray-800 mb-4">Page not found</h1>
+      <p className="text-gray-600 mb-6">
+        Sorry, the page you’re looking for doesn’t exist.
+      </p>
+
+      {/* Optional debug – only shown if ?debug=1 */}
+      {searchParams.get("debug") === "1" && (
+        <pre className="bg-gray-100 p-4 text-sm text-left rounded">
+          {JSON.stringify(Object.fromEntries(searchParams.entries()), null, 2)}
+        </pre>
+      )}
+
+      <Link
+        href="/"
+        className="inline-block rounded-xl bg-black px-6 py-3 text-white font-medium hover:opacity-90 transition"
+      >
+        Back to Home
+      </Link>
+    </section>
+  );
+}
 
 export default function NotFound() {
   return (
-    <html>
-      <body className="flex h-screen items-center justify-center bg-gray-50">
-        <div className="text-center">
-          <h1 className="text-4xl font-bold mb-2">Page not found</h1>
-          <p className="text-gray-700 mb-6">
-            Sorry, we couldn’t find that page.
-          </p>
-
-          {/* GOOD: use <Link />, not <a> */}
-          <Link
-            href="/"
-            className="rounded-lg bg-black px-4 py-2 text-white hover:opacity-90"
-          >
-            Go home
-          </Link>
-        </div>
-      </body>
-    </html>
+    <Suspense fallback={<div>Loading...</div>}>
+      <NotFoundContent />
+    </Suspense>
   );
 }
