@@ -1,11 +1,10 @@
 'use client';
-
 import Image from 'next/image';
 import Link from 'next/link';
 
-export default function ComingSoon() {
+export default function HomePage() {
   return (
-    <div className="flex min-h-screen flex-col items-center justify-center bg-[#2B2F4A] text-[#F5F5F5] text-center p-8">
+    <main className="flex min-h-screen flex-col items-center justify-center bg-[#2B2F4A] text-[#F5F5F5] text-center p-8">
       <Image
         src="/logo.png"
         alt="Eclipsed Citadel Logo"
@@ -22,6 +21,6 @@ export default function ComingSoon() {
       >
         Contact Us
       </Link>
-    </div>
+    </main>
   );
 }
