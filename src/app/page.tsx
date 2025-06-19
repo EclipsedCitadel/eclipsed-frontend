@@ -9,8 +9,8 @@ export default function HomePage() {
       <Image
         src="/logo.png"
         alt="Eclipsed Citadel Logo"
-        width={120}
-        height={120}
+        width={1024}
+        height={1024}
       />
 
       <h1 className="text-4xl mt-6 font-bold">The Citadel Is Rising</h1>
