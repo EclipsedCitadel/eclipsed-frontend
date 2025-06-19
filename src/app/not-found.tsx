@@ -4,7 +4,7 @@ import { useSearchParams } from 'next/navigation';
 import { Suspense } from 'react';
 import Link from 'next/link';
 
-function NotFoundContent() {
+function NotFoundInner() {
   const params = useSearchParams();
   const shouldThrow = params?.get('error');
 
@@ -28,8 +28,8 @@ function NotFoundContent() {
 
 export default function NotFound() {
   return (
-    <Suspense fallback={<p className="text-center mt-10">Loading...</p>}>
-      <NotFoundContent />
+    <Suspense fallback={<div className="text-center py-20">Loading...</div>}>
+      <NotFoundInner />
     </Suspense>
   );
 }
