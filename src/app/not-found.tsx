@@ -1,26 +1,23 @@
 'use client';
 
-import { useSearchParams } from 'next/navigation';
 import { Suspense } from 'react';
 import Link from 'next/link';
+import { useSearchParams } from 'next/navigation';
 
-function NotFoundInner() {
-  const params = useSearchParams();
-  const shouldThrow = params?.get('error');
+function NotFoundContent() {
+  const searchParams = useSearchParams();
+  const triggerError = searchParams.get('error');
 
-  if (shouldThrow) throw new Error('Forced error for testing');
+  if (triggerError) throw new Error('Simulated 500 error for testing.');
 
   return (
-    <div className="text-center py-20">
-      <h1 className="text-4xl font-bold mb-4">404 - Page Not Found</h1>
-      <p className="mb-6 text-gray-600">
-        The page you&apos;re looking for doesn&apos;t exist.
+    <div className="text-center py-20 px-6">
+      <h1 className="text-4xl font-bold mb-4">404 – Page Not Found</h1>
+      <p className="text-lg text-gray-500 mb-6">
+        Sorry, the page you&apos;re looking for doesn&apos;t exist.
       </p>
-      <Link
-        href="/"
-        className="rounded-lg bg-black px-4 py-2 text-white hover:opacity-90"
-      >
-        Go home
+      <Link href="/" className="text-white bg-[#FF6F3C] px-4 py-2 rounded hover:opacity-90">
+        Back to Homepage
       </Link>
     </div>
   );
@@ -28,8 +25,8 @@ function NotFoundInner() {
 
 export default function NotFound() {
   return (
-    <Suspense fallback={<div className="text-center py-20">Loading...</div>}>
-      <NotFoundInner />
+    <Suspense fallback={<div className="text-center py-20">Loading 404 page...</div>}>
+      <NotFoundContent />
     </Suspense>
   );
 }
